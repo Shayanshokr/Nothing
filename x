@@ -2,7 +2,7 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
 import requests
 from bs4 import BeautifulSoup
-
+import os
 # تابع استخراج لینک دانلود از سایت ثالث (اینجا از igram.io استفاده می‌کنیم)
 def get_media_url(insta_url):
     session = requests.Session()
@@ -50,7 +50,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 # راه‌اندازی ربات
 def main():
-    TOKEN = "🔑 توکن ربات تلگرام خودت رو اینجا بذار"
+    TOKEN = os.getenv("BOT_TOKEN")
     app = ApplicationBuilder().token(TOKEN).build()
 
     app.add_handler(CommandHandler("start", start))
